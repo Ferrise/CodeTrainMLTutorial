@@ -8,7 +8,7 @@ function setup() {
     createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     inputs = [-1, 0.5]
     for (var i = 0; i < 100; i++) {
-        points.push(new Point());
+        points.push(new Point())
     }
     p = new Perceptron()
     guess = p.guess(inputs)
@@ -18,19 +18,19 @@ function setup() {
 function draw() {
     background(255)
     stroke(0)
-    line(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+    line(0, CANVAS_HEIGHT, CANVAS_WIDTH, 0)
     points.forEach((point) => {
         point.show()
     })
 
     points.forEach((point) => {
-        inputs = [point.x, point.y]
+        inputs = [point.fx, point.fy]
         target = point.label
         p.train(inputs, target)
 
         let guess = p.guess(inputs)
         if(guess === target) {
-            fill(0, 255,0)
+            fill(0, 255, 0)
         } else {
             fill(255, 0, 0)
         }
@@ -87,10 +87,13 @@ class Perceptron {
 //training
 class Point {
     constructor() {
-        this.x = Math.random() * CANVAS_WIDTH
-        this.y = Math.random() * CANVAS_HEIGHT
+        this.fx = Math.random() * 2 - 1 
+        this.fy = Math.random() * 2 - 1
+
+        this.x = (this.fx + 1) * (CANVAS_WIDTH/2)
+        this.y = ((this.fy - 1) * (CANVAS_HEIGHT/2)) * -1
         
-        if(this.x > this.y) {
+        if(this.fx > this.fy) {
             this.label = 1
         }
         else {
@@ -105,6 +108,7 @@ class Point {
         } else {
             fill(0)
         }
+
         ellipse(this.x, this.y, 32, 32)
     }
 }
