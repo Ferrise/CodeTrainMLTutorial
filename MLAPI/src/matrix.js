@@ -12,18 +12,43 @@ var Matrix = class {
         }
     }
 
-    sum(n) {
+    randomize() {
+        
         for(let i = 0; i < this.rows; i++) {
             for(let j = 0; j < this.cols; j++) {
-                this.matrix[i][j] += n;
+                this.matrix[i][j] = Math.floor(Math.random() * 10);
+            }
+        }
+    }
+
+    sum(n) {
+        if(n instanceof Matrix) {
+            for(let i = 0; i < this.rows; i++) {
+                for(let j = 0; j < this.cols; j++) {
+                    this.matrix[i][j] += n.matrix[i][j];
+                }
+            }
+        } else {
+            for(let i = 0; i < this.rows; i++) {
+                for(let j = 0; j < this.cols; j++) {
+                    this.matrix[i][j] += n;
+                }
             }
         }
     }
 
     multiply(n) {
-        for(let i = 0; i < this.rows; i++) {
-            for(let j = 0; j < this.cols; j++) {
-                this.matrix[i][j] *= n;
+        if(n instanceof Matrix) {
+            for(let i = 0; i < this.rows; i++) {
+                for(let j = 0; j < this.cols; j++) {
+                    this.matrix[i][j] *= n.matrix[i][j];
+                }
+            }
+        } else {
+            for(let i = 0; i < this.rows; i++) {
+                for(let j = 0; j < this.cols; j++) {
+                    this.matrix[i][j] *= n;
+                }
             }
         }
     }
