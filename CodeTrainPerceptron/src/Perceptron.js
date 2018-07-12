@@ -18,7 +18,7 @@ function setup() {
     guess = p.guess(inputs)
     console.log(guess)
 }
-
+j
 
 function draw() {
     background(255)
